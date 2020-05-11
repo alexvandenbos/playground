@@ -12,3 +12,6 @@
 # 3. kook de spaghettie 
 # 4. voeg spaghettie toe aan de shit mengsel
 # 5. serveer op bord
+
+
+# dit zijn de ingredienten
