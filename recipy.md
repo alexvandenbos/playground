@@ -5,3 +5,11 @@ Spaghetti Carbonara! This dish was traditionally used to feed Italian coal miner
 
 
 # this is a comment for the test commit to sub branch
+
+# bereidings wijze van Spaghettie carbonara
+
+# 1. Rul die shit
+# 2. voeg die andere shit toe
+# 3. kook de spaghettie 
+# 4. voeg spaghettie toe aan de shit mengsel
+# 5. serveer op bord
