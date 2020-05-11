@@ -14,5 +14,8 @@ Spaghetti Carbonara! This dish was traditionally used to feed Italian coal miner
 # 4. voeg spaghettie toe aan de shit mengsel
 # 5. serveer op bord
 
-
 # dit zijn de ingredienten
+# 1.water
+# 2.shit
+# 3.peper
+# 4.zout
