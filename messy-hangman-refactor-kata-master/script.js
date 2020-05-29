@@ -21,6 +21,7 @@ const wordpicker = function (list) {
   console.log("wat ben ik?", word);
   return x[index];
 };
+module.exports = wordpicker;
 
 let inputs;
 const wordGuessed = function (word, inputs) {
@@ -33,6 +34,7 @@ const wordGuessed = function (word, inputs) {
   // If we have letters left, right?
   return remaining.length === 0;
 };
+//module.exports = wordGuessed;
 
 const clean = function () {
   document.querySelector("input").value = "";
