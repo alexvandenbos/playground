@@ -12,6 +12,11 @@ test("wordPicker fails if wordList is empty ", () => {
   expect(functions.wordPicker(list)).toBeUndefined();
 });
 
+test("wordPicker fails if wordList is empty ", () => {
+  const list = 0;
+  expect(functions.wordPicker(list)).not.toEqual(null);
+});
+
 // const list = wordList const pickedWord = pickWord(list) expect pickedWord to Be (true)
 
 // const list = 0 const pickedWord = pickWord(list) expect pickedWord to Be (false)
