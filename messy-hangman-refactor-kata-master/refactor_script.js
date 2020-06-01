@@ -22,6 +22,25 @@ const wordPicker = function (list) {
   return x[index];
 };
 
+const checkLetter = function (word, guessedLetter) {
+  if (word.includes(guessedLetter)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const updateAttemptsRemaining = function (checkLetter, attemptsRemaining) {
+  if ((checkLetter = true)) {
+    console.log("true", attemptsRemaining);
+    return attemptsRemaining;
+  } else {
+    attemptsRemaining = attemptsRemaining + 1;
+    console.log("false", attemptsRemaining);
+    return attemptsRemaining;
+  }
+};
+
 let inputs;
 const wordGuessed = function (word, inputs) {
   // remove all letters from word that are already guessed
@@ -138,4 +157,4 @@ document.addEventListener("DOMContentLoaded", function () {
   beginTheGameWithPlayer();
 });
 
-module.exports = { wordList, wordPicker };
+module.exports = { wordList, wordPicker, checkLetter, updateAttemptsRemaining };

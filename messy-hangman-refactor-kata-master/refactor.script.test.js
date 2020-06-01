@@ -17,23 +17,41 @@ test("wordPicker fails if wordList is empty ", () => {
   expect(functions.wordPicker(list)).not.toEqual(null);
 });
 
-// const list = wordList const pickedWord = pickWord(list) expect pickedWord to Be (true)
-
-// const list = 0 const pickedWord = pickWord(list) expect pickedWord to Be (false)
-
 // 2. checken of een letter voorkomt in het woord
 
-// na het ingeven van een letter wordt gechecked of deze voorkomt in het gekozen woord
+// nieuwe functie gemaakt: checkletter
 
-// const wordToGuess = "hoofdpijn" const lettersRemaining = 5 const letterGuessed = "o" expect letterChecker(wordToGuess, letterGuessed) toBe true expect lettersRemaining toBe 4
+test("checkLetter returns true if word contains letter", () => {
+  const word = "boom";
+  const guessedLetter = "o";
+  expect(functions.checkLetter(word, guessedLetter)).toBe(true);
+});
 
-// const wordToGuess = "hoofdpijn" const lettersRemaining = 5 const letterGuessed = "e" expect letterChecker(wordToGuess, letterGuessed) toBe false expect lettersRemaining toBe 5
-
-// als de ingegeven letter voormkomt in het gekozen woord verschijnt de letter op de juiste steepjes
-
-// Dit is een DOM test, extra requirement
+test("checkLetter returns true if word contains letter", () => {
+  const word = "boom";
+  const guessedLetter = "a";
+  expect(functions.checkLetter(word, guessedLetter)).toBe(false);
+});
 
 // 3. updaten van het aantal pogingen van de gebruiker
+
+// nieuwe functie gemaakt: updateAttemptsRemaining
+
+test("if the guess is incorrect updateAttemptsRemaining substracts 1 from AttemptsRemaining", () => {
+  const checkLetter = false;
+  const attemptsRemaining = 5;
+  expect(
+    functions.updateAttemptsRemaining(checkLetter, attemptsRemaining)
+  ).toBe(4);
+});
+
+test("if the guess is correct updateAttemptsRemaining substracts nothing from AttemptsRemaining", () => {
+  const checkLetter = true;
+  const attemptsRemaining = 5;
+  expect(
+    functions.updateAttemptsRemaining(checkLetter, attemptsRemaining)
+  ).toBe(5);
+});
 
 // als de ingegeven letter niet voorkomt in het gekozen woord wordt het aantal resterende pogingen verminderd met 1
 
