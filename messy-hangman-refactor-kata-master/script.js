@@ -137,3 +137,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", beginTheGameWithPlayer);
   beginTheGameWithPlayer();
 });
+
+//exporteert beide constanten
+module.exports = {wordList, wordpicker};
