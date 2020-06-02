@@ -61,6 +61,20 @@ test("if the guess is correct updateAttemptsRemaining substracts nothing from At
 
 // 4. updaten van de lijst met letters die al geraden zijn door de gebruiker
 
+test("if inputs contains letters that are not in word, the letters function returns them", () => {
+  const word = "vrachtwagen";
+  const inputs = ["a", "q", "x"];
+  const array = functions.letters(word, inputs);
+  expect(array).toEqual(["q", "x"]);
+});
+
+test("if inputs does not contain letters that are not in word, the letters function returns nothing", () => {
+  const word = "vrachtwagen";
+  const inputs = ["a", "v", "r"];
+  const array = functions.letters(word, inputs);
+  expect(array).toEqual([]);
+});
+
 // als de ingegeven letter niet voorkomt in het gekozen woord wordt deze toegevoegd aan de lijst reeds geraden letters
 
 // const failedLetters = ["a","f',"g"] const letterGuessed = "e" const letterChecker = true expect failUpdater(failedLetters, letterChecker, letterGuessed) toBe === failedLetters

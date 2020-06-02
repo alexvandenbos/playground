@@ -12,13 +12,9 @@ const wordList = [
 ];
 let maxAmount = 5;
 
-let word;
 const wordPicker = function (list) {
-  let word = "sinaasappel";
   let index = Math.floor(Math.random() * list.length);
   const x = list;
-  console.log("wat ben ik?", word);
-  console.log(x[index]);
   return x[index];
 };
 
@@ -31,12 +27,10 @@ const checkLetter = function (word, guessedLetter) {
 };
 
 const updateAttemptsRemaining = function (checkLetter, attemptsRemaining) {
-  if ((checkLetter = true)) {
-    console.log("true", attemptsRemaining);
+  if (checkLetter === true) {
     return attemptsRemaining;
   } else {
-    attemptsRemaining = attemptsRemaining + 1;
-    console.log("false", attemptsRemaining);
+    attemptsRemaining = attemptsRemaining - 1;
     return attemptsRemaining;
   }
 };
@@ -53,10 +47,6 @@ const wordGuessed = function (word, inputs) {
   return remaining.length === 0;
 };
 
-const clean = function () {
-  document.querySelector("input").value = "";
-};
-
 let gameOver;
 const winTheGame = function () {
   document.querySelector(".win").style.display = "block";
@@ -69,20 +59,13 @@ const lose4 = function () {
   gameOver = true;
 };
 
-const spanTheWord1 = function (word) {
-  document.querySelector(".lose p span").innerHTML = `"${word.join("")}"`;
-};
-
-let tries = 0;
-const updateTriesDisplay = function (tries) {
-  document.querySelector(".lives span").innerHTML = 5 - tries;
-};
-
 const letters = function (word, inputs) {
   let wrongLetters = inputs.filter(function (letter) {
     // If the letter is in the word return.... false/true (we want to remove that then)
     return !word.includes(letter);
   });
+  console.log(wrongLetters);
+  return wrongLetters;
   document.querySelector(".guessed_letters").innerHTML = wrongLetters.join(" ");
 };
 
@@ -157,4 +140,10 @@ document.addEventListener("DOMContentLoaded", function () {
   beginTheGameWithPlayer();
 });
 
-module.exports = { wordList, wordPicker, checkLetter, updateAttemptsRemaining };
+module.exports = {
+  wordList,
+  wordPicker,
+  checkLetter,
+  updateAttemptsRemaining,
+  letters,
+};
