@@ -2,17 +2,17 @@ const functions = require("./refactor_script.js");
 
 // 1. starten van de game d.m.v. het kiezen van het woord
 
-test("wordPicker picks word from wordList", () => {
+test("1 wordPicker picks word from wordList", () => {
   const list = functions.wordList;
   expect(functions.wordPicker(list)).toBeTruthy();
 });
 
-test("wordPicker fails if wordList is empty ", () => {
+test("1 wordPicker fails if wordList is empty ", () => {
   const list = 0;
   expect(functions.wordPicker(list)).toBeUndefined();
 });
 
-test("wordPicker fails if wordList is empty ", () => {
+test("1 wordPicker fails if wordList is empty ", () => {
   const list = 0;
   expect(functions.wordPicker(list)).not.toEqual(null);
 });
@@ -21,36 +21,42 @@ test("wordPicker fails if wordList is empty ", () => {
 
 // nieuwe functie gemaakt: checkletter
 
-test("checkLetter returns true if word contains letter", () => {
-  const word = "boom";
-  const guessedLetter = "o";
-  expect(functions.checkLetter(word, guessedLetter)).toBe(true);
+test("2 theWord returns _ if word does not contain letter", () => {
+  const word = ["b", "o", "o", "m"];
+  const inputLetterWords = ["q"];
+  expect(functions.theWord(word, inputLetterWords)).toEqual([
+    "_",
+    "_",
+    "_",
+    "_",
+  ]);
 });
 
-test("checkLetter returns true if word contains letter", () => {
-  const word = "boom";
-  const guessedLetter = "a";
-  expect(functions.checkLetter(word, guessedLetter)).toBe(false);
+test("2 theWord returns _ if word does not contain letter", () => {
+  const word = ["b", "o", "o", "m"];
+  const inputLetterWords = ["o"];
+  expect(functions.theWord(word, inputLetterWords)).toEqual([
+    "_",
+    "o",
+    "o",
+    "_",
+  ]);
 });
 
 // 3. updaten van het aantal pogingen van de gebruiker
 
 // nieuwe functie gemaakt: updateAttemptsRemaining
 
-test("if the guess is incorrect updateAttemptsRemaining substracts 1 from AttemptsRemaining", () => {
-  const checkLetter = false;
-  const attemptsRemaining = 5;
-  expect(
-    functions.updateAttemptsRemaining(checkLetter, attemptsRemaining)
-  ).toBe(4);
+test("als de letter niet in het woord voorkomt wordt tries geupdate", () => {
+  const word = ["b", "o", "o", "m"];
+  const input1 = "q";
+  expect(functions.updateTries(word, input1)).toBe(true);
 });
 
-test("if the guess is correct updateAttemptsRemaining substracts nothing from AttemptsRemaining", () => {
-  const checkLetter = true;
-  const attemptsRemaining = 5;
-  expect(
-    functions.updateAttemptsRemaining(checkLetter, attemptsRemaining)
-  ).toBe(5);
+test("als de letter wel in het woord voorkomt wordt tries niet geupdate", () => {
+  const word = ["b", "o", "o", "m"];
+  const input1 = "o";
+  expect(functions.updateTries(word, input1)).toBe(false);
 });
 
 // als de ingegeven letter niet voorkomt in het gekozen woord wordt het aantal resterende pogingen verminderd met 1
@@ -61,17 +67,19 @@ test("if the guess is correct updateAttemptsRemaining substracts nothing from At
 
 // 4. updaten van de lijst met letters die al geraden zijn door de gebruiker
 
-test("if inputs contains letters that are not in word, the letters function returns them", () => {
+test("4 if inputs contains letters that are not in word, the letters function returns them", () => {
   const word = "vrachtwagen";
   const inputs = ["a", "q", "x"];
   const array = functions.letters(word, inputs);
+  console.log(word, inputs, array, typeof word, typeof inputs, typeof array);
   expect(array).toEqual(["q", "x"]);
 });
 
-test("if inputs does not contain letters that are not in word, the letters function returns nothing", () => {
+test("4 if inputs does not contain letters that are not in word, the letters function returns nothing", () => {
   const word = "vrachtwagen";
   const inputs = ["a", "v", "r"];
   const array = functions.letters(word, inputs);
+  console.log(word, inputs, array, typeof word, typeof inputs, typeof array);
   expect(array).toEqual([]);
 });
 
@@ -83,13 +91,13 @@ test("if inputs does not contain letters that are not in word, the letters funct
 
 // 5. verliezen van de game wanneer er geen pogingen meer over zijn
 
-test("on the 5th failed attempt the player loses the game", () => {
+test("5 on the 5th failed attempt the player loses the game", () => {
   let tries = 5;
   const lose = functions.checkIfLost(tries);
   expect(lose).toBeTruthy();
 });
 
-test("with lees than 5 failed attempts the player does not lose the game", () => {
+test("5 with less than 5 failed attempts the player does not lose the game", () => {
   let tries = 4;
   const lose = functions.checkIfLost(tries);
   expect(lose).toBeFalsy();
@@ -103,17 +111,17 @@ test("with lees than 5 failed attempts the player does not lose the game", () =>
 
 // 6. winnen van de game
 
-test("when all letters of the word are guessed, the player wins", () => {
+test("6 when all letters of the word are guessed, the player wins", () => {
   let word = ["g", "e", "e", "u", "w"];
   let inputs = ["g", "e", "u", "w"];
-  const win = functions.checkIfWon(word, inputs);
+  const win = functions.wordGuessed(word, inputs);
   expect(win).toBeTruthy();
 });
 
-test("when all letters of the word are guessed, the player wins", () => {
+test("6 when all letters of the word are guessed, the player wins", () => {
   let word = ["g", "e", "e", "u", "w"];
   let inputs = ["e", "u", "w"];
-  const win = functions.checkIfWon(word, inputs);
+  const win = functions.wordGuessed(word, inputs);
   expect(win).toBeFalsy();
 });
 
