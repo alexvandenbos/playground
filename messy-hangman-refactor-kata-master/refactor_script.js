@@ -99,7 +99,6 @@ const guessLetter = function () {
   inputs.push(input1);
   theWord(word, inputs);
   letters(word, inputs);
-
   checkIfWon();
   checkIfLost();
 };
@@ -154,6 +153,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", beginTheGameWithPlayer);
   beginTheGameWithPlayer();
 });
+
+function hangmanUpdate(tries) {
+  document.querySelector(".gallows img").src = `./assets/Gallows${tries}.png`;
+}
 
 module.exports = {
   wordList,

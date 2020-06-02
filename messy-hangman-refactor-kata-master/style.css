@@ -44,15 +44,29 @@ button {
   width: 80px;
   height: 44px;  
 }
+.lose p {
+  padding: 8px;
+}
 .win,
 .lose {
   display: none;
 }
-.win h2 {
-  color: red;
+.animationprop {
+  width: 100%;
+  animation-name: example;
+  animation-duration: 5s; 
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out; 
 }
-.lose h2 {
-  color: blue;
+@keyframes example {
+  from {background-color: red;}
+  to {background-color: yellow;}
+}
+.win h2 img{
+  color: red;   
+}
+.lose h2 img {
+  color: blue;  
 }
 .gallows img {
   width: 400px;
@@ -72,8 +86,3 @@ button {
   font-weight: 1000;
   font-size: 2em;
 }
-
-/* function hangmanUpdate(tries) {
-  let x = tries
-  document.querySelector(".gallows img").src = `./assets/Gallows${x}.png`;
-} */

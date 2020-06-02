@@ -139,8 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function hangmanUpdate(tries) {
-  let x = tries
-  document.querySelector(".gallows img").src = `./assets/Gallows${x}.png`;
+  document.querySelector(".gallows img").src = `./assets/Gallows${tries}.svg`;
 }
 
 //exporteert beide constanten
