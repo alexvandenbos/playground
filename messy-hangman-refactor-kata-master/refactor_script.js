@@ -12,14 +12,27 @@ const wordList = [
 ];
 let maxAmount = 5;
 
-let word;
 const wordPicker = function (list) {
-  let word = "sinaasappel";
   let index = Math.floor(Math.random() * list.length);
   const x = list;
-  console.log("wat ben ik?", word);
-  console.log(x[index]);
   return x[index];
+};
+
+const checkLetter = function (word, guessedLetter) {
+  if (word.includes(guessedLetter)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const updateAttemptsRemaining = function (checkLetter, attemptsRemaining) {
+  if (checkLetter === true) {
+    return attemptsRemaining;
+  } else {
+    attemptsRemaining = attemptsRemaining - 1;
+    return attemptsRemaining;
+  }
 };
 
 let inputs;
@@ -34,10 +47,6 @@ const wordGuessed = function (word, inputs) {
   return remaining.length === 0;
 };
 
-const clean = function () {
-  document.querySelector("input").value = "";
-};
-
 let gameOver;
 const winTheGame = function () {
   document.querySelector(".win").style.display = "block";
@@ -50,20 +59,13 @@ const lose4 = function () {
   gameOver = true;
 };
 
-const spanTheWord1 = function (word) {
-  document.querySelector(".lose p span").innerHTML = `"${word.join("")}"`;
-};
-
-let tries = 0;
-const updateTriesDisplay = function (tries) {
-  document.querySelector(".lives span").innerHTML = 5 - tries;
-};
-
 const letters = function (word, inputs) {
   let wrongLetters = inputs.filter(function (letter) {
     // If the letter is in the word return.... false/true (we want to remove that then)
     return !word.includes(letter);
   });
+  console.log(wrongLetters);
+  return wrongLetters;
   document.querySelector(".guessed_letters").innerHTML = wrongLetters.join(" ");
 };
 
@@ -98,10 +100,25 @@ const guessLetter = function () {
   theWord(word, inputs);
   letters(word, inputs);
 
+  checkIfWon();
+  checkIfLost();
+};
+
+const checkIfLost = function (tries) {
+  if (tries >= 5) {
+    // lose4();
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const checkIfWon = function (word, inputs) {
   if (wordGuessed(word, inputs)) {
-    winTheGame();
-  } else if (tries >= 5) {
-    lose4();
+    // winTheGame();
+    return true;
+  } else {
+    return false;
   }
 };
 
@@ -138,4 +155,13 @@ document.addEventListener("DOMContentLoaded", function () {
   beginTheGameWithPlayer();
 });
 
-module.exports = { wordList, wordPicker };
+module.exports = {
+  wordList,
+  wordPicker,
+  checkLetter,
+  updateAttemptsRemaining,
+  letters,
+  guessLetter,
+  checkIfLost,
+  checkIfWon,
+};
