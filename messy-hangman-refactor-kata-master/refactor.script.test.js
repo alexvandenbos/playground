@@ -49,14 +49,14 @@ test("2 theWord returns _ if word does not contain letter", () => {
 
 test("als de letter niet in het woord voorkomt wordt tries geupdate", () => {
   const word = ["b", "o", "o", "m"];
-  const input1 = "q";
-  expect(functions.updateTries(word, input1)).toBe(true);
+  const guessedLetter = "q";
+  expect(functions.updateTries(word, guessedLetter)).toBe(true);
 });
 
 test("als de letter wel in het woord voorkomt wordt tries niet geupdate", () => {
   const word = ["b", "o", "o", "m"];
-  const input1 = "o";
-  expect(functions.updateTries(word, input1)).toBe(false);
+  const guessedLetter = "o";
+  expect(functions.updateTries(word, guessedLetter)).toBe(false);
 });
 
 // als de ingegeven letter niet voorkomt in het gekozen woord wordt het aantal resterende pogingen verminderd met 1
@@ -67,19 +67,19 @@ test("als de letter wel in het woord voorkomt wordt tries niet geupdate", () => 
 
 // 4. updaten van de lijst met letters die al geraden zijn door de gebruiker
 
-test("4 if inputs contains letters that are not in word, the letters function returns them", () => {
+test("4 if letterInputArray contains letters that are not in word, the letters function returns them", () => {
   const word = "vrachtwagen";
-  const inputs = ["a", "q", "x"];
-  const array = functions.letters(word, inputs);
-  console.log(word, inputs, array, typeof word, typeof inputs, typeof array);
+  const letterInputArray = ["a", "q", "x"];
+  const array = functions.letters(word, letterInputArray);
+  console.log(word, letterInputArray, array, typeof word, typeof letterInputArray, typeof array);
   expect(array).toEqual(["q", "x"]);
 });
 
-test("4 if inputs does not contain letters that are not in word, the letters function returns nothing", () => {
+test("4 if letterInputArray does not contain letters that are not in word, the letters function returns nothing", () => {
   const word = "vrachtwagen";
-  const inputs = ["a", "v", "r"];
-  const array = functions.letters(word, inputs);
-  console.log(word, inputs, array, typeof word, typeof inputs, typeof array);
+  const letterInputArray = ["a", "v", "r"];
+  const array = functions.letters(word, letterInputArray);
+  console.log(word, letterInputArray, array, typeof word, typeof letterInputArray, typeof array);
   expect(array).toEqual([]);
 });
 
@@ -113,15 +113,15 @@ test("5 with less than 5 failed attempts the player does not lose the game", () 
 
 test("6 when all letters of the word are guessed, the player wins", () => {
   let word = ["g", "e", "e", "u", "w"];
-  let inputs = ["g", "e", "u", "w"];
-  const win = functions.wordGuessed(word, inputs);
+  let letterInputArray = ["g", "e", "u", "w"];
+  const win = functions.wordGuessed(word, letterInputArray);
   expect(win).toBeTruthy();
 });
 
 test("6 when all letters of the word are guessed, the player wins", () => {
   let word = ["g", "e", "e", "u", "w"];
-  let inputs = ["e", "u", "w"];
-  const win = functions.wordGuessed(word, inputs);
+  let letterInputArray = ["e", "u", "w"];
+  const win = functions.wordGuessed(word, letterInputArray);
   expect(win).toBeFalsy();
 });
 
