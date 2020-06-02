@@ -12,23 +12,46 @@ test("wordPicker fails if wordList is empty ", () => {
   expect(functions.wordPicker(list)).toBeUndefined();
 });
 
-// const list = wordList const pickedWord = pickWord(list) expect pickedWord to Be (true)
-
-// const list = 0 const pickedWord = pickWord(list) expect pickedWord to Be (false)
+test("wordPicker fails if wordList is empty ", () => {
+  const list = 0;
+  expect(functions.wordPicker(list)).not.toEqual(null);
+});
 
 // 2. checken of een letter voorkomt in het woord
 
-// na het ingeven van een letter wordt gechecked of deze voorkomt in het gekozen woord
+// nieuwe functie gemaakt: checkletter
 
-// const wordToGuess = "hoofdpijn" const lettersRemaining = 5 const letterGuessed = "o" expect letterChecker(wordToGuess, letterGuessed) toBe true expect lettersRemaining toBe 4
+test("checkLetter returns true if word contains letter", () => {
+  const word = "boom";
+  const guessedLetter = "o";
+  expect(functions.checkLetter(word, guessedLetter)).toBe(true);
+});
 
-// const wordToGuess = "hoofdpijn" const lettersRemaining = 5 const letterGuessed = "e" expect letterChecker(wordToGuess, letterGuessed) toBe false expect lettersRemaining toBe 5
-
-// als de ingegeven letter voormkomt in het gekozen woord verschijnt de letter op de juiste steepjes
-
-// Dit is een DOM test, extra requirement
+test("checkLetter returns true if word contains letter", () => {
+  const word = "boom";
+  const guessedLetter = "a";
+  expect(functions.checkLetter(word, guessedLetter)).toBe(false);
+});
 
 // 3. updaten van het aantal pogingen van de gebruiker
+
+// nieuwe functie gemaakt: updateAttemptsRemaining
+
+test("if the guess is incorrect updateAttemptsRemaining substracts 1 from AttemptsRemaining", () => {
+  const checkLetter = false;
+  const attemptsRemaining = 5;
+  expect(
+    functions.updateAttemptsRemaining(checkLetter, attemptsRemaining)
+  ).toBe(4);
+});
+
+test("if the guess is correct updateAttemptsRemaining substracts nothing from AttemptsRemaining", () => {
+  const checkLetter = true;
+  const attemptsRemaining = 5;
+  expect(
+    functions.updateAttemptsRemaining(checkLetter, attemptsRemaining)
+  ).toBe(5);
+});
 
 // als de ingegeven letter niet voorkomt in het gekozen woord wordt het aantal resterende pogingen verminderd met 1
 
@@ -38,6 +61,20 @@ test("wordPicker fails if wordList is empty ", () => {
 
 // 4. updaten van de lijst met letters die al geraden zijn door de gebruiker
 
+test("if inputs contains letters that are not in word, the letters function returns them", () => {
+  const word = "vrachtwagen";
+  const inputs = ["a", "q", "x"];
+  const array = functions.letters(word, inputs);
+  expect(array).toEqual(["q", "x"]);
+});
+
+test("if inputs does not contain letters that are not in word, the letters function returns nothing", () => {
+  const word = "vrachtwagen";
+  const inputs = ["a", "v", "r"];
+  const array = functions.letters(word, inputs);
+  expect(array).toEqual([]);
+});
+
 // als de ingegeven letter niet voorkomt in het gekozen woord wordt deze toegevoegd aan de lijst reeds geraden letters
 
 // const failedLetters = ["a","f',"g"] const letterGuessed = "e" const letterChecker = true expect failUpdater(failedLetters, letterChecker, letterGuessed) toBe === failedLetters
@@ -46,6 +83,18 @@ test("wordPicker fails if wordList is empty ", () => {
 
 // 5. verliezen van de game wanneer er geen pogingen meer over zijn
 
+test("on the 5th failed attempt the player loses the game", () => {
+  let tries = 5;
+  const lose = functions.checkIfLost(tries);
+  expect(lose).toBeTruthy();
+});
+
+test("with lees than 5 failed attempts the player does not lose the game", () => {
+  let tries = 4;
+  const lose = functions.checkIfLost(tries);
+  expect(lose).toBeFalsy();
+});
+
 // zodra het aantal pogingen === 0 eindigt het spel met verlies
 
 // const livesRemaining = 0 expect loseGame(livesRemaining) toBe true
@@ -53,6 +102,20 @@ test("wordPicker fails if wordList is empty ", () => {
 // const livesRemaining = 1 expect loseGame(livesRemaining) toBe false
 
 // 6. winnen van de game
+
+test("when all letters of the word are guessed, the player wins", () => {
+  let word = ["g", "e", "e", "u", "w"];
+  let inputs = ["g", "e", "u", "w"];
+  const win = functions.checkIfWon(word, inputs);
+  expect(win).toBeTruthy();
+});
+
+test("when all letters of the word are guessed, the player wins", () => {
+  let word = ["g", "e", "e", "u", "w"];
+  let inputs = ["e", "u", "w"];
+  const win = functions.checkIfWon(word, inputs);
+  expect(win).toBeFalsy();
+});
 
 // zodra het aantal nog te raden letters van het gekozen woord === 0 eindigt het spel met winst
 
