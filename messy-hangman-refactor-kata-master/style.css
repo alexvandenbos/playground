@@ -4,16 +4,13 @@
   font-family: 'Open Sans', sans-serif;
   vertical-align: baseline;  
 }
+h1, h2, h3, p, .the_word, .guessed_letters {
+  color: white;
+}
 body{
   background-color: darkcyan;
   display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto;
   justify-items: center;
-
-}
-h1, h2, h3, p, .the_word, .guessed_letters {
-  color: white;
 }
 wrapper {
   display: grid;
@@ -65,14 +62,8 @@ button:hover {
   from {background-color: red;}
   to {background-color: yellow;}
 }
-.win h2 img{
-  color: red;   
-}
-.lose h2 img {
-  color: blue;  
-}
 .gallows img {
-  width: 400px;
+  width: 100%;
 }
 .coolcta > *{
   border-radius: 5px;

@@ -20,6 +20,10 @@ const wordPicker = function (list) {
   const x = list;
   return x[index];
 };
+//url update hangman svg
+function hangmanUpdate(tries) {
+  document.querySelector(".gallows img").src = `./assets/Gallows${tries}.svg`;
+}
 
 let inputs;
 const wordGuessed = function (word, inputs) {
@@ -151,6 +155,7 @@ const guessLetter = function () {
 
   updateDomGuessedLetters(wrongLetters);
   updateDomTheWord(display);
+  hangmanUpdate(tries);
 
   checkIfLost();
 
@@ -163,6 +168,7 @@ const guessLetter = function () {
     winTheGame();
   }
 };
+
 
 module.exports = {
   document,
