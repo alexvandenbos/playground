@@ -72,3 +72,8 @@ button {
   font-weight: 1000;
   font-size: 2em;
 }
+
+/* function hangmanUpdate(tries) {
+  let x = tries
+  document.querySelector(".gallows img").src = `./assets/Gallows${x}.png`;
+} */

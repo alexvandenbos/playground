@@ -138,5 +138,10 @@ document.addEventListener("DOMContentLoaded", function () {
   beginTheGameWithPlayer();
 });
 
+function hangmanUpdate(tries) {
+  let x = tries
+  document.querySelector(".gallows img").src = `./assets/Gallows${x}.png`;
+}
+
 //exporteert beide constanten
-module.exports = {wordList, wordpicker};
+module.exports = { wordList, wordpicker };
