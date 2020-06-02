@@ -100,10 +100,25 @@ const guessLetter = function () {
   theWord(word, inputs);
   letters(word, inputs);
 
+  checkIfWon();
+  checkIfLost();
+};
+
+const checkIfLost = function (tries) {
+  if (tries >= 5) {
+    // lose4();
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const checkIfWon = function (word, inputs) {
   if (wordGuessed(word, inputs)) {
-    winTheGame();
-  } else if (tries >= 5) {
-    lose4();
+    // winTheGame();
+    return true;
+  } else {
+    return false;
   }
 };
 
@@ -146,4 +161,7 @@ module.exports = {
   checkLetter,
   updateAttemptsRemaining,
   letters,
+  guessLetter,
+  checkIfLost,
+  checkIfWon,
 };

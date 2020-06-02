@@ -83,6 +83,18 @@ test("if inputs does not contain letters that are not in word, the letters funct
 
 // 5. verliezen van de game wanneer er geen pogingen meer over zijn
 
+test("on the 5th failed attempt the player loses the game", () => {
+  let tries = 5;
+  const lose = functions.checkIfLost(tries);
+  expect(lose).toBeTruthy();
+});
+
+test("with lees than 5 failed attempts the player does not lose the game", () => {
+  let tries = 4;
+  const lose = functions.checkIfLost(tries);
+  expect(lose).toBeFalsy();
+});
+
 // zodra het aantal pogingen === 0 eindigt het spel met verlies
 
 // const livesRemaining = 0 expect loseGame(livesRemaining) toBe true
@@ -90,6 +102,20 @@ test("if inputs does not contain letters that are not in word, the letters funct
 // const livesRemaining = 1 expect loseGame(livesRemaining) toBe false
 
 // 6. winnen van de game
+
+test("when all letters of the word are guessed, the player wins", () => {
+  let word = ["g", "e", "e", "u", "w"];
+  let inputs = ["g", "e", "u", "w"];
+  const win = functions.checkIfWon(word, inputs);
+  expect(win).toBeTruthy();
+});
+
+test("when all letters of the word are guessed, the player wins", () => {
+  let word = ["g", "e", "e", "u", "w"];
+  let inputs = ["e", "u", "w"];
+  const win = functions.checkIfWon(word, inputs);
+  expect(win).toBeFalsy();
+});
 
 // zodra het aantal nog te raden letters van het gekozen woord === 0 eindigt het spel met winst
 
