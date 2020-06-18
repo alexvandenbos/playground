@@ -20,4 +20,4 @@ const Menu = ({ open }) => {
 Menu.propTypes = {
     open: bool.isRequired,
 };
-export default Menu;
+export default Menu; 
