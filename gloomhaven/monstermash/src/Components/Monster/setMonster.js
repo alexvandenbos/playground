@@ -8,30 +8,33 @@ class SetMonster extends React.Component {
         this.state = {
             dataMonster,
             selectedMonster: "",
-            partyLevelHigherThenFour: false,
+            selectedMonsterLevel: "",
             displayedMonsters: []
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.mySelection = this.mySelection.bind(this)
         this.addMonstertoBoard = this.addMonstertoBoard.bind(this)
-        this.removeStateContent = this.removeStateContent.bind(this)
     }
     handleChange(event) {
-        const { name, value, type, checked } = event.target
-        type === "checkbox" ?
-            this.setState({ [name]: checked }) :
-            this.setState({ [name]: value })
+        const { name, value } = event.target
+        name === "searchfieldbutton" ?
+            this.setState({ selectedMonster: "" }, console.log("emptied searchfield state")) :
+            name === "battelfieldbutton" ?
+                this.setState({ displayedMonsters: [] }, console.log("emptied displaymonsters state")) :
+                this.setState({ [name]: value })
     }
     handleSubmit(event) {
         this.addMonstertoBoard()
         event.preventDefault();
     }
     mySelection() {
-        let monsterMap = this.state.dataMonster.map(monster =>
-            monster.path)
+        let monsterMap = this.state.dataMonster.map(monster => monster.path)
+        let WatchLevel = parseInt(this.state.selectedMonsterLevel.slice())
+        let SelectiveDisplay = WatchLevel >= 4 ? '4' : '0'
         let possibleMonstersForLevel = monsterMap.filter(monster =>
-            monster.includes(this.state.partyLevelHigherThenFour ? '4' : '0'))
+            monster.includes(SelectiveDisplay))
+        console.log(possibleMonstersForLevel)
         let possibleMonsters = possibleMonstersForLevel.filter(monster =>
             monster.includes(this.state.selectedMonster))
         if (possibleMonsters.length <= 6) {
@@ -47,33 +50,40 @@ class SetMonster extends React.Component {
             prevState.displayedMonsters.push(MonsterCardComponentData), console.log("pushed required monsterdata to MonsterCardCompentData")
         )
     }
-    removeStateContent(event) {
-        const { name } = event.target
-        name === "searchfieldbutton" ?
-            this.setState({ selectedMonster: "" }, console.log("emptied searchfield state")) : this.setState({ displayedMonsters: [] }, console.log("emptied displaymonsters state"))
-    }
     render() {
-        const MonsterCards = this.state.displayedMonsters.map(monster =>
-            <MonsterCard
+        const MonsterCards = this.state.displayedMonsters.map((monster, index) => {
+            return < MonsterCard
                 className="MonsterCard"
+                monsterLevel={this.state.selectedMonsterLevel}
                 path={monster.path}
                 name={monster.path.replace(/-|[0-9]|.png/g, ' ').trim()}
                 id={monster.id}
-                key={monster.id}
+                fieldkey={index}
+                key={index}
             />
-        )
+        })
         return (
             <div className="selection-menu" >
-                <h3>set monster</h3>
                 <form onSubmit={this.handleSubmit}>
-                    <label htmlFor={'higher-then-four-checkbox'}>
-                        <input
-                            type='checkbox'
-                            name='partyLevelHigherThenFour'
+                    <label>monster level:
+                        <select
+                            name="selectedMonsterLevel"
+                            value={this.state.selectedMonsterLevel}
                             onChange={this.handleChange}
-                            value={this.state.partyLevelHigherThenFour}
-                        /> {this.state.partyLevelHigherThenFour ? "partylevel above 4 " : "partylevel below 4 "}
+                        >
+                            <option value="0">--select level--</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+
                     </label>
+                    <br />
                     <input
                         type='text'
                         autoComplete="off"
@@ -85,13 +95,13 @@ class SetMonster extends React.Component {
                     <input
                         name="searchfieldbutton"
                         type="button"
-                        onClick={this.removeStateContent}
+                        onClick={this.handleChange}
                         value="empty"
                     />
                     <input
                         name="battelfieldbutton"
                         type="button"
-                        onClick={this.removeStateContent}
+                        onClick={this.handleChange}
                         value="empty battlefield"
                     />
                     <br />
@@ -114,3 +124,4 @@ class SetMonster extends React.Component {
     }
 }
 export default SetMonster
+
