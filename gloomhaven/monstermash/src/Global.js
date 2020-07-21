@@ -15,7 +15,7 @@ html, body {
     text-rendering: optimizeLegibility;
    }
    
-   navigation {
+   nav {
      color: white;
      position: fixed;
      background: green;
