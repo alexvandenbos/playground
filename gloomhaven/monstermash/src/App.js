@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './Global';
 import { theme } from './Theme';
-import SetMonster from './Components/Monster/setMonster.js';
+import SetField from './Components/Field/setField.js';
 import Header from './Components/header';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Header />
-      <SetMonster />
+      <SetField />
     </ThemeProvider>
   );
 }
