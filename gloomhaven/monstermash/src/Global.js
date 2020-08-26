@@ -27,7 +27,9 @@ html, body {
      display: flex;
      flex-direction: column;
    }
-   .selection-menu h2 {
+   .AbilitycardsOnField{
+     display: flex;
+     justify-content: center;
      
    }
    .MonstersOnField {
