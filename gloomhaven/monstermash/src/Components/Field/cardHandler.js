@@ -18,6 +18,7 @@ class CardHandler extends React.Component {
         this.addTurnCount = this.addTurnCount.bind(this)
         this.createCurrentAbilityCard = this.createCurrentAbilityCard.bind(this)
         this.shuffleMonsterAbililtyCardStack = this.shuffleMonsterAbililtyCardStack.bind(this)
+        this.resetTurnCount = this.resetTurnCount.bind(this)
 
     }
     // when changed state has gotten the requirements
@@ -67,14 +68,16 @@ class CardHandler extends React.Component {
 
     //find abilitycard stack
     resetMonsterAbilityCardStack(stack) {
-        //console.log("i want to reset the ability card stack", stack, origin)        
         stack.availableAbilityCards = [...Array(Object.keys(stack.cards).length).keys()].slice(1, 9)
-
-
+        console.log("i want to reset the ability card stack", stack)
+        this.forceUpdate()
     }
     //shuffle
     shuffleMonsterAbililtyCardStack(event) {
         let compId = parseInt(event.target.id)
+        let target = event.target
+        target.parentElement.parentElement.lastChild.classList.add("shuffle")
+        console.log(target)
         let [matchingStack] = this.state.abilityCardStacks.filter(stack => stack.id === compId)
         this.resetMonsterAbilityCardStack(matchingStack)
     }
@@ -100,17 +103,22 @@ class CardHandler extends React.Component {
     }
     // adds turn and resets turn
     addTurnCount() {
-        if (this.state.turn <= 7) {
-            this.setState(prevState => ({
-                turn: prevState.turn + 1
-            }),
-                this.createMonsterAbilityCardStack()
-            )
-        } else {
-            this.setState({ turn: 0 },
-                this.createMonsterAbilityCardStack()
-            )
-        }
+        this.setState(prevState => ({
+            turn: prevState.turn + 1
+        }),
+            this.createMonsterAbilityCardStack()
+        )
+        let x = Array.from(document.getElementsByClassName("shuffle"))
+        x.forEach(eachclass => eachclass.classList.remove("shuffle"))
+
+    }
+    resetTurnCount() {
+        this.setState({ turn: 0 },
+            dataMonsterAbilities.forEach(cards => delete cards.availableAbilityCards),
+            this.createMonsterAbilityCardStack()
+        )
+        let x = Array.from(document.getElementsByClassName("shuffle"))
+        x.forEach(eachclass => eachclass.classList.remove("shuffle"))
     }
 
     //0// adds an abilitycard for each unique monstersset from the chosenMonsters (props) to state and goes to next function
@@ -126,7 +134,6 @@ class CardHandler extends React.Component {
     showAbilityCardFromStack() {
         //reset diplayed cards
         this.setState({ abilityCardsForComponents: [] })
-
         // first check for stack with another amount of cards
         this.state.abilityCardStacks.forEach(abilityCardStack => {
             if (abilityCardStack.availableAbilityCards.length === 0) {
@@ -193,6 +200,18 @@ class CardHandler extends React.Component {
         )
         return (
             <div>
+                <div>
+
+                    <h2>Turn: {this.state.turn}</h2>
+                    <input
+                        className="button"
+                        name="reset turn"
+                        type="button"
+                        onClick={this.resetTurnCount}
+                        value="reset"
+                    />
+
+                </div>
                 <div className="AbilitycardsOnField">
                     {abilitycards}
                 </div>

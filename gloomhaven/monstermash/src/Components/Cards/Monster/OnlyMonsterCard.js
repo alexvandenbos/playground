@@ -32,6 +32,7 @@ function OnlyMonsterCard(props) {
         <div className="MonsterCard">
             <h3>level {props.level} {props.name} number {props.monsternumber}</h3>
             <input
+                className="button"
                 name="removemonster"
                 type="button"
                 onClick={props.removeData}

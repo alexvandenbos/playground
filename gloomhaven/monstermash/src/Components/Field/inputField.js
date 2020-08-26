@@ -1,5 +1,6 @@
 import React from 'react'
 import dataMonster from '../Cards/Monster/dataMonsterCard'
+import dataMonsterAbilities from '../Cards/Ability/dataAbilityCard'
 import CardHandler from './cardHandler'
 //handles the input and general data, wich it passes to the cardHandler.
 class InputField extends React.Component {
@@ -48,7 +49,7 @@ class InputField extends React.Component {
         if (name === "searchfieldbutton") {
             this.setState({ selectedMonster: "" })
         } else if (name === "battelfieldbutton") {
-            this.setState({ displayedMonstersFromData: [] })
+            this.setState({ displayedMonstersFromData: [] }, dataMonsterAbilities.forEach(cards => delete cards.availableAbilityCards))
         } else if (name === "removemonster") {
             let copy = this.state.displayedMonstersFromData.filter(entry =>
                 entry.fieldkey !== idAsNumber).slice()
@@ -89,6 +90,7 @@ class InputField extends React.Component {
                     <label>
                         Monster level:
                     <select name="selectedMonsterLevel"
+                            className="inputField"
                             value={this.state.selectedMonsterLevel}
                             onChange={this.handleChange}>
                             <option value="0">0</option>
@@ -103,6 +105,7 @@ class InputField extends React.Component {
                     </label>
                     <input
                         type='text'
+                        className="inputField"
                         autoComplete="off"
                         name="selectedMonster"
                         placeholder="Monster"
@@ -110,12 +113,14 @@ class InputField extends React.Component {
                         value={this.state.selectedMonster}
                     />
                     <input
+                        className="button"
                         name="searchfieldbutton"
                         type="button"
                         onClick={this.removeData}
                         value="empty searchfield"
                     />
                     <input
+                        className="button"
                         name="battelfieldbutton"
                         type="button"
                         onClick={this.removeData}
@@ -125,6 +130,7 @@ class InputField extends React.Component {
                         Options:
                     {this.mySelection().length <= 10 ? this.mySelection().map(monster =>
                         <button
+                            className="button"
                             key={monster.id}
                             value={monster.name}
                             onClick={this.handleChange}
